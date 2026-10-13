@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ismail Haiber, ingénieur QA Full-Stack à Paris : automatisation des tests web, mobile et API, tests d'agents IA.">
+<meta property="og:title" content="Ismail 3000 · Au-delà de la qualité">
+<meta property="og:description" content="Ingénieur QA Full-Stack · Web · Mobile · API · IA">
+<meta property="og:image" content="photo.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0718'/%3E%3Cpath d='M9 7h14M9 25h14M16 7v18' stroke='%23ff3fa4' stroke-width='3'/%3E%3C/svg%3E">
+<title>Ismail 3000</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tilt+Neon&family=Neonderthaw&family=Chakra+Petch:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one scrolling "neon night" page, synthwave grid hero, QA test-run vernacular as section labels */
+:root{
+  color-scheme: dark;
+  --bg:#0b0718; --bg-2:#130c2a; --panel:#1a1238; --line:#3a2b6e;
+  --fg:#efeaff; --muted:#a79fcf; --dim:#6e649a;
+  --pink:#ff3fa4; --pink-soft:#ff8fcb; --cyan:#3ee8ff; --violet:#9b6bff;
+  --ok:#4dffb0; --warn:#ffc94d;
+  --glow-pink: 0 0 4px #fff3, 0 0 10px var(--pink), 0 0 26px var(--pink), 0 0 60px #ff3fa480;
+  --glow-cyan: 0 0 4px #fff3, 0 0 10px var(--cyan), 0 0 24px #3ee8ffaa;
+  --f-neon:"Tilt Neon", "Chakra Petch", system-ui, sans-serif;
+  --f-sign:"Neonderthaw", "Brush Script MT", cursive;
+  --f-head:"Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Exo 2", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  --wrap: 1120px;
+}
+*{box-sizing:border-box}
+img{max-width:100%}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+::selection{background:var(--pink);color:#fff}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:20px}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;padding-top:env(safe-area-inset-top,0px);
+  background:linear-gradient(#0b0718ee,#0b0718aa);backdrop-filter:blur(10px);border-bottom:1px solid #3a2b6e88}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.logo{font-family:var(--f-neon);font-size:22px;letter-spacing:.06em;color:#fff;text-decoration:none;text-shadow:var(--glow-pink);white-space:nowrap}
+.logo b{font-weight:400;color:var(--cyan);text-shadow:var(--glow-cyan)}
+.links{display:flex;gap:22px;margin-left:auto}
+.links a{font-family:var(--f-head);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s,text-shadow .2s}
+.links a:hover{color:#fff;text-shadow:0 0 10px var(--pink)}
+.navtools{display:flex;gap:10px;align-items:center}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{all:unset;cursor:pointer;font-family:var(--f-head);font-size:12px;font-weight:600;letter-spacing:.1em;padding:5px 11px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--pink);color:#fff;box-shadow:0 0 14px var(--pink)}
+@media (max-width:860px){.links{display:none}.navtools{margin-left:auto}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding-top:calc(64px + 9vh);padding-bottom:280px;overflow:hidden;isolation:isolate;text-align:center}
+.hero::before{content:"";position:absolute;inset:0;z-index:-3;
+  background:radial-gradient(60% 50% at 50% 30%,#3b1a6b 0%,transparent 70%),radial-gradient(40% 40% at 80% 10%,#2a0f4a 0%,transparent 70%)}
+.floor{position:absolute;left:-50%;right:-50%;bottom:-2px;height:240px;z-index:-2;perspective:260px;pointer-events:none}
+.floor i{position:absolute;inset:0;transform:rotateX(62deg);transform-origin:bottom;
+  background-image:linear-gradient(var(--pink) 1.5px,transparent 1.5px),linear-gradient(90deg,var(--pink) 1.5px,transparent 1.5px);
+  background-size:60px 40px;opacity:.55;animation:run 2.2s linear infinite;
+  -webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%)}
+.floor::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--cyan);box-shadow:0 0 18px 3px var(--cyan);opacity:.7}
+@keyframes run{to{background-position:0 40px}}
+.shape{position:absolute;z-index:-1;border:2px solid;border-radius:6px;animation:float 9s ease-in-out infinite}
+.s1{width:46px;height:46px;top:24%;left:9%;color:var(--pink);border-color:currentColor;transform:rotate(45deg);box-shadow:0 0 12px currentColor,inset 0 0 12px currentColor}
+.s2{width:64px;height:64px;top:58%;right:8%;color:var(--cyan);border-color:currentColor;transform:rotate(45deg);box-shadow:0 0 14px currentColor,inset 0 0 14px currentColor;animation-delay:-3s}
+.s3{width:22px;height:22px;top:16%;right:22%;color:var(--violet);border-color:currentColor;box-shadow:0 0 10px currentColor;animation-delay:-5s}
+.s4{width:30px;height:30px;bottom:34%;left:20%;color:var(--cyan);border-color:currentColor;border-radius:50%;box-shadow:0 0 10px currentColor;animation-delay:-1.5s}
+@keyframes float{50%{translate:0 -18px;rotate:20deg}}
+
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:13px;padding:7px 14px;border-radius:999px;border:1px solid currentColor;background:#0b071899;margin-bottom:28px}
+.status .dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor;animation:pulse 1.8s ease-in-out infinite}
+.status[data-kind="cdi"]{color:var(--warn)}
+.status[data-kind="available"]{color:var(--ok)}
+.status[data-kind="mission"]{color:var(--cyan)}
+.status[data-kind="unavailable"]{color:var(--pink-soft)}
+@keyframes pulse{50%{opacity:.35}}
+
+.neon{font-family:var(--f-neon);font-weight:400;line-height:.95;margin:0;color:#fff4fb;
+  font-size:clamp(58px,13vw,168px);letter-spacing:.04em;text-wrap:balance;
+  text-shadow:var(--glow-pink);animation:flicker 3.2s linear 1}
+.neon .n3{color:#e9fdff;text-shadow:var(--glow-cyan)}
+@keyframes flicker{0%,6%{opacity:.15}7%{opacity:1}9%{opacity:.3}11%,100%{opacity:1}}
+.sign{font-family:var(--f-sign);font-size:clamp(40px,7vw,76px);color:#dffbff;text-shadow:var(--glow-cyan);
+  margin:-.25em 0 0;transform:rotate(-5deg);display:inline-block;padding-left:min(18vw,220px)}
+.role{font-family:var(--f-head);font-weight:600;font-size:clamp(20px,3vw,28px);letter-spacing:.08em;text-transform:uppercase;margin:34px 0 4px}
+.scope{font-family:var(--f-head);color:var(--cyan);letter-spacing:.3em;font-size:14px;text-transform:uppercase}
+.term{margin:26px auto 0;max-width:560px;text-align:left;font-family:var(--f-mono);font-size:14px;background:#0b0718cc;border:1px solid var(--line);border-radius:10px;padding:12px 16px;color:var(--muted)}
+.term .p{color:var(--pink)}
+.term .t{color:#fff}
+.term .ok{color:var(--ok)}
+.caret{display:inline-block;width:.6em;height:1.1em;vertical-align:-.2em;background:var(--cyan);margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-family:var(--f-head);font-weight:600;font-size:14px;letter-spacing:.16em;text-transform:uppercase;padding:14px 24px;border-radius:6px;border:2px solid var(--pink);color:#fff;box-shadow:0 0 12px #ff3fa466,inset 0 0 12px #ff3fa433;transition:box-shadow .2s,background .2s;text-align:center}
+.btn:hover{background:#ff3fa422;box-shadow:0 0 24px var(--pink),inset 0 0 16px #ff3fa466}
+.btn.cy{border-color:var(--cyan);box-shadow:0 0 12px #3ee8ff55,inset 0 0 12px #3ee8ff22}
+.btn.cy:hover{background:#3ee8ff18;box-shadow:0 0 24px var(--cyan),inset 0 0 16px #3ee8ff55}
+.btn.ghost{border-color:var(--line);box-shadow:none;color:var(--muted)}
+.btn.ghost:hover{border-color:var(--violet);color:#fff;box-shadow:0 0 16px #9b6bff66}
+.btn svg{width:16px;height:16px;flex:none}
+
+/* ---------- sections ---------- */
+section.sec{padding-block:96px;position:relative;overflow-x:clip}
+section.sec:nth-of-type(even){background:linear-gradient(180deg,transparent,#130c2a 18%,#130c2a 82%,transparent)}
+.label{font-family:var(--f-mono);font-size:13px;color:var(--pink-soft);margin:0 0 10px}
+.label .k{color:var(--violet)} .label .s{color:var(--cyan)}
+h2{font-family:var(--f-head);font-weight:700;font-size:clamp(30px,4.4vw,46px);letter-spacing:.04em;text-transform:uppercase;margin:0 0 40px;text-wrap:balance;line-height:1.1}
+h2 em{font-style:normal;color:var(--cyan);text-shadow:0 0 18px #3ee8ff88}
+p{margin:0}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:56px;align-items:center}
+.ph{position:relative;aspect-ratio:1;max-width:320px;width:100%;margin-inline:auto}
+.ph img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;filter:saturate(1.05) contrast(1.05)}
+.ph::before{content:"";position:absolute;inset:-12px;border-radius:50%;border:2px solid var(--pink);box-shadow:0 0 18px var(--pink),inset 0 0 18px #ff3fa477}
+.ph::after{content:"";position:absolute;inset:-26px;border-radius:50%;border:1px dashed var(--cyan);opacity:.6;animation:spin 40s linear infinite}
+@keyframes spin{to{rotate:360deg}}
+.about .txt p{color:#d9d2f5;max-width:62ch;margin-bottom:1em;font-size:17px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.stat{border:1px solid var(--line);border-radius:10px;padding:14px;background:#0b071880}
+.stat b{display:block;font-family:var(--f-neon);font-weight:400;font-size:34px;color:#fff;text-shadow:var(--glow-pink);line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted);line-height:1.3;display:block}
+@media (max-width:820px){.about{grid-template-columns:1fr;gap:48px}.ph{max-width:min(260px,72vw)}.sign{padding-left:0}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* services */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{position:relative;padding:26px 24px 22px;border-radius:12px;background:linear-gradient(160deg,#1d1440,#120b29);border:1px solid var(--line);transition:border-color .25s,box-shadow .25s,transform .25s;display:flex;flex-direction:column;gap:10px}
+.card:hover{border-color:var(--pink);box-shadow:0 0 0 1px var(--pink),0 0 28px #ff3fa455;transform:translateY(-3px)}
+.card .ic{width:40px;height:40px;color:var(--cyan);filter:drop-shadow(0 0 6px var(--cyan))}
+.card h3{font-family:var(--f-head);font-size:20px;font-weight:600;letter-spacing:.03em;margin:4px 0 0}
+.card p{color:#cfc7ee;font-size:15px}
+.card .tags{margin-top:auto;padding-top:8px;font-family:var(--f-mono);font-size:12px;color:var(--pink-soft)}
+@media (max-width:980px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.cards{grid-template-columns:1fr}}
+
+/* timeline */
+.tl{position:relative;margin:0;padding:0;list-style:none}
+.tl::before{content:"";position:absolute;left:150px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--pink),var(--violet),var(--cyan));box-shadow:0 0 12px var(--pink)}
+.job{display:grid;grid-template-columns:130px minmax(0,1fr);gap:40px;padding-bottom:34px;position:relative}
+.job::before{content:"";position:absolute;left:144px;top:7px;width:14px;height:14px;border-radius:3px;transform:rotate(45deg);background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.job .when{font-family:var(--f-mono);font-size:13px;color:var(--muted);text-align:right;padding-top:2px;line-height:1.4}
+.job .when b{display:block;color:var(--fg);font-weight:500}
+.job h3{font-family:var(--f-head);font-size:20px;font-weight:600;margin:0}
+.job .co{color:var(--pink);font-family:var(--f-head);font-weight:600;letter-spacing:.04em}
+.job ul{margin:10px 0 8px;padding-left:18px;color:#d0c8ef;font-size:15px}
+.job li{margin-bottom:4px}
+.job li::marker{color:var(--cyan);content:"▸  "}
+.job .st{font-family:var(--f-mono);font-size:12px;color:var(--dim)}
+@media (max-width:700px){
+  .tl::before{left:6px}.job{grid-template-columns:1fr;gap:6px;padding-left:34px}
+  .job::before{left:0}.job .when{text-align:left;display:flex;gap:10px;flex-wrap:wrap}.job .when b{display:inline}}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 30px}
+.sk h3{font-family:var(--f-mono);font-size:13px;font-weight:500;color:var(--cyan);margin:0 0 12px;letter-spacing:.05em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--f-head);font-size:14px;font-weight:500;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:#0b0718aa;transition:border-color .2s,box-shadow .2s}
+.chip:hover{border-color:var(--pink);box-shadow:0 0 12px #ff3fa455}
+@media (max-width:860px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.skills{grid-template-columns:1fr}}
+
+/* certs */
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px}
+.cert{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #3a2b6e88;font-family:var(--f-head);font-size:17px}
+.cert .tick{font-family:var(--f-mono);font-size:12px;padding:3px 8px;border-radius:4px;border:1px solid currentColor;flex:none;min-width:84px;text-align:center}
+.cert .tick.ok{color:var(--ok)} .cert .tick.progress{color:var(--warn)}
+.edu{padding:14px 0;border-bottom:1px solid #3a2b6e88}
+.edu b{font-family:var(--f-head);font-size:17px;font-weight:600;display:block}
+.edu span{color:var(--muted);font-size:14px}
+.edu .sc{color:var(--pink-soft)}
+.langs{margin-top:22px;font-family:var(--f-head);color:var(--muted)}
+.langs b{color:var(--cyan);font-family:var(--f-mono);font-weight:500;font-size:13px;display:block;margin-bottom:4px}
+.subh{font-family:var(--f-mono);font-size:13px;color:var(--cyan);margin:0 0 6px}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+
+/* contact */
+.contact{text-align:center}
+.contact .msg{max-width:56ch;margin:0 auto 34px;color:#d9d2f5;font-size:18px}
+.mailbox{display:inline-flex;align-items:center;gap:6px;max-width:100%;flex-wrap:wrap;justify-content:center;border:2px solid var(--cyan);border-radius:12px;padding:8px 8px 8px 22px;box-shadow:0 0 22px #3ee8ff55;background:#0b0718}
+.mailbox a{font-family:var(--f-mono);font-size:clamp(15px,2.6vw,22px);color:#fff;text-decoration:none;word-break:break-all;text-shadow:0 0 12px #3ee8ff88}
+.copy{all:unset;cursor:pointer;font-family:var(--f-head);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 16px;border-radius:8px;background:var(--cyan);color:#06121a}
+.copy:hover{box-shadow:0 0 18px var(--cyan)}
+.contact .ctas{margin-top:26px}
+.loc{margin-top:22px;color:var(--muted);font-family:var(--f-mono);font-size:13px}
+.note{min-height:1.4em;margin-top:12px;font-family:var(--f-mono);font-size:13px;color:var(--ok)}
+
+footer{padding-block:40px 60px;text-align:center;color:var(--dim);font-family:var(--f-mono);font-size:12px;border-top:1px solid #3a2b6e66}
+footer .logo{font-size:18px;display:inline-block;margin-bottom:6px}
+
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;all:unset;position:fixed;cursor:pointer;display:flex;align-items:center;gap:8px;padding:13px 18px;border-radius:999px;background:var(--pink);color:#fff;font-family:var(--f-head);font-weight:600;font-size:14px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 0 20px var(--pink),0 6px 24px #0008;transition:transform .2s}
+.fab:hover{transform:translateY(-2px)}
+.fab svg{width:18px;height:18px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Navigation">
+  <div class="wrap">
+    <a class="logo" href="#top">I<b>·</b>3000</a>
+    <div class="links">
+      <a href="#about" data-i="nav_about">À propos</a>
+      <a href="#services" data-i="nav_services">Services</a>
+      <a href="#parcours" data-i="nav_path">Parcours</a>
+      <a href="#stack" data-i="nav_stack">Stack</a>
+      <a href="#contact" data-i="nav_contact">Contact</a>
+    </div>
+    <div class="navtools">
+      <div class="lang" role="group" aria-label="Langue">
+        <button id="lang-fr" type="button" aria-pressed="true">FR</button>
+        <button id="lang-en" type="button" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="floor"><i></i></div>
+  <span class="shape s1"></span><span class="shape s2"></span><span class="shape s3"></span><span class="shape s4"></span>
+  <div class="wrap">
+    <div class="status" id="status" data-kind="cdi"><span class="dot"></span><span id="statusTxt"></span></div>
+    <h1 class="neon" id="heroName"></h1>
+    <div><p class="sign" id="heroTag"></p></div>
+    <p class="role" id="heroTitle"></p>
+    <p class="scope" id="heroScope"></p>
+    <div class="term" aria-live="off">
+      <div><span class="p">$</span> <span class="t">npx playwright test --project=ismail</span></div>
+      <div><span class="ok">✓</span> <span id="typed"></span><span class="caret"></span></div>
+    </div>
+    <div class="ctas">
+      <a class="btn" href="#contact" data-i="cta_contact">Me contacter</a>
+      <a class="btn cy" href="#services" data-i="cta_services">Mes services</a>
+      <a class="btn ghost cvbtn" href="cv-ismail-haiber.pdf" download="CV-Ismail-Haiber.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span data-i="cta_cv">Télécharger mon CV</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="about">
+    <div class="wrap about">
+      <div class="ph"><img id="photo" src="photo.jpg" alt="Portrait d'Ismail Haiber" width="560" height="560"></div>
+      <div class="txt">
+        <p class="label"><span class="k">describe</span>(<span class="s">'<span data-i="about_label">à propos</span>'</span>)</p>
+        <h2 data-i-html="about_h">Qualité <em>augmentée</em></h2>
+        <div id="aboutText"></div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="services">
+    <div class="wrap">
+      <p class="label"><span class="k">describe</span>(<span class="s">'services'</span>)</p>
+      <h2 data-i-html="serv_h">Ce que je <em>teste</em> pour vous</h2>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="parcours">
+    <div class="wrap">
+      <p class="label"><span class="k">describe</span>(<span class="s">'<span data-i="path_label">parcours</span>'</span>)</p>
+      <h2 data-i-html="path_h">Journal <em>d'exécution</em></h2>
+      <ol class="tl" id="tl"></ol>
+    </div>
+  </section>
+
+  <section class="sec" id="stack">
+    <div class="wrap">
+      <p class="label"><span class="k">describe</span>(<span class="s">'stack'</span>)</p>
+      <h2 data-i-html="stack_h">Arsenal <em>technique</em></h2>
+      <div class="skills" id="skills"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="certs">
+    <div class="wrap two">
+      <div>
+        <p class="label"><span class="k">describe</span>(<span class="s">'certifications'</span>)</p>
+        <h2 data-i-html="cert_h">Certifié <em>conforme</em></h2>
+        <div id="certList"></div>
+      </div>
+      <div>
+        <p class="label"><span class="k">describe</span>(<span class="s">'<span data-i="edu_label">formation</span>'</span>)</p>
+        <h2 data-i-html="edu_h">Base <em>de code</em></h2>
+        <div id="eduList"></div>
+        <div class="langs"><b data-i="langs">langues</b><span id="langsTxt"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec contact" id="contact">
+    <div class="wrap">
+      <p class="label"><span class="k">expect</span>(<span class="s" data-i="contact_label">'votre projet'</span>).<span class="k">toPass</span>()</p>
+      <h2 data-i-html="contact_h">Lançons <em>le test</em></h2>
+      <p class="msg" id="contactMsg"></p>
+      <div class="mailbox"><a id="mail" href="#"></a><button class="copy" id="copyMail" type="button" data-i="copy">Copier</button></div>
+      <div class="note" id="note" role="status"></div>
+      <div class="ctas">
+        <a class="btn cy" id="linkedin" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a>
+        <a class="btn ghost cvbtn" href="cv-ismail-haiber.pdf" download="CV-Ismail-Haiber.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span data-i="cta_cv">Télécharger mon CV</span></a>
+      </div>
+      <p class="loc" id="loc"></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="logo">ISMAIL <b>3000</b></div>
+  <div id="foot"></div>
+</footer>
+
+<a class="fab" href="#contact" id="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg><span data-i="fab">Contact</span></a>
+
+<script>
+(() => {
+"use strict";
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+const UI = {
+  fr: { nav_about:"À propos", nav_services:"Services", nav_path:"Parcours", nav_stack:"Stack", nav_contact:"Contact",
+    cta_contact:"Me contacter", cta_services:"Mes services", cta_cv:"Télécharger mon CV", about_label:"à propos",
+    about_h:"Qualité <em>augmentée</em>", serv_h:"Ce que je <em>teste</em> pour vous", path_label:"parcours",
+    path_h:"Journal <em>d'exécution</em>", stack_h:"Arsenal <em>technique</em>", cert_h:"Certifié <em>conforme</em>",
+    edu_label:"formation", edu_h:"Base <em>de code</em>", langs:"langues", contact_label:"'votre projet'",
+    contact_h:"Lançons <em>le test</em>", copy:"Copier", copied:"Adresse copiée ✓", copyfail:"Sélectionnez l'adresse pour la copier",
+    cv_open:"Ouvrir le CV (PDF)", fab:"Contact", ok:"obtenue", progress:"en cours", footer:"Ingénieur QA Full-Stack · Paris",
+    cv_saved:"CV prêt ✓", cv_declined:"Téléchargement annulé", cv_err:"Le téléchargement n'est pas disponible ici, utilisez le lien ci-dessous" },
+  en: { nav_about:"About", nav_services:"Services", nav_path:"Experience", nav_stack:"Stack", nav_contact:"Contact",
+    cta_contact:"Get in touch", cta_services:"My services", cta_cv:"Download my CV", about_label:"about",
+    about_h:"Quality, <em>augmented</em>", serv_h:"What I <em>test</em> for you", path_label:"experience",
+    path_h:"Execution <em>log</em>", stack_h:"Tech <em>arsenal</em>", cert_h:"Certified <em>compliant</em>",
+    edu_label:"education", edu_h:"Core <em>code base</em>", langs:"languages", contact_label:"'your project'",
+    contact_h:"Let's run <em>the test</em>", copy:"Copy", copied:"Address copied ✓", copyfail:"Select the address to copy it",
+    cv_open:"Open the CV (PDF)", fab:"Contact", ok:"certified", progress:"in progress", footer:"Full-Stack QA Engineer · Paris",
+    cv_saved:"CV ready ✓", cv_declined:"Download cancelled", cv_err:"Downloads are not available here, use the link below" }
+};
+const ICONS = [
+  '<path d="M3 12h4l3-8 4 16 3-8h4"/>',
+  '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9l3 3-3 3M13 15h4"/>',
+  '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+  '<path d="M8 4 3 12l5 8M16 4l5 8-5 8M14 4l-4 16"/>',
+  '<rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6M2 12h3M19 12h3"/>',
+  '<path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 10A8 8 0 0 0 6 5L4 10M4 14a8 8 0 0 0 14 5l2-5"/>'
+];
+
+let data, lang = "fr";
+try { lang = localStorage.getItem("i3000-lang") || "fr"; } catch (e) {}
+const T = (o) => (o && typeof o === "object") ? (o[lang] ?? o.fr ?? "") : (o ?? "");
+const lines = (s) => String(s || "").split("\n").map(x => x.trim()).filter(Boolean);
+const clone = (o) => JSON.parse(JSON.stringify(o));
+
+/* ---------- render ---------- */
+function render() {
+  document.documentElement.lang = lang;
+  const u = UI[lang];
+  document.querySelectorAll("[data-i]").forEach(n => { n.textContent = u[n.dataset.i] ?? n.textContent; });
+  document.querySelectorAll("[data-i-html]").forEach(n => { n.innerHTML = u[n.dataset.iHtml]; });
+  $("#lang-fr").setAttribute("aria-pressed", lang === "fr");
+  $("#lang-en").setAttribute("aria-pressed", lang === "en");
+
+  const st = data.status || {};
+  $("#status").dataset.kind = st.kind || "cdi";
+  $("#statusTxt").textContent = T(st.label);
+
+  const h = data.hero;
+  const nm = $("#heroName"); nm.textContent = "";
+  const m = String(h.name || "").match(/^(.*?)(\s*\d+)$/);
+  if (m) { nm.append(m[1]); nm.append(el("span", "n3", m[2])); } else nm.textContent = h.name;
+  $("#heroTag").textContent = T(h.tagline);
+  $("#heroTitle").textContent = T(h.title);
+  $("#heroScope").textContent = h.scope;
+  startTyping(lines(T(h.typed)));
+
+  const ab = $("#aboutText"); ab.textContent = "";
+  T(data.about.text).split(/\n\s*\n/).forEach(p => ab.append(el("p", null, p.trim())));
+  const stats = $("#stats"); stats.textContent = "";
+  (data.about.stats || []).forEach(s => { const d = el("div", "stat"); d.append(el("b", null, s.value), el("span", null, T(s.label))); stats.append(d); });
+
+  const cards = $("#cards"); cards.textContent = "";
+  (data.services || []).forEach((s, i) => {
+    const c = el("article", "card");
+    c.insertAdjacentHTML("beforeend", `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[i % ICONS.length]}</svg>`);
+    c.append(el("h3", null, T(s.title)), el("p", null, T(s.text)), el("div", "tags", s.tags));
+    cards.append(c);
+  });
+
+  const tl = $("#tl"); tl.textContent = "";
+  (data.experience || []).forEach(j => {
+    const li = el("li", "job");
+    const w = el("div", "when"); w.append(el("b", null, T(j.period)), el("span", null, j.place)); li.append(w);
+    const b = el("div");
+    b.append(el("h3", null, T(j.role)), el("div", "co", j.company));
+    const ul = el("ul"); lines(T(j.points)).forEach(p => ul.append(el("li", null, p))); b.append(ul);
+    if (j.stack) b.append(el("div", "st", j.stack));
+    li.append(b); tl.append(li);
+  });
+
+  const sk = $("#skills"); sk.textContent = "";
+  (data.skills || []).forEach(g => {
+    const d = el("div", "sk"); d.append(el("h3", null, "// " + T(g.group)));
+    const ch = el("div", "chips"); String(g.items || "").split(",").map(x => x.trim()).filter(Boolean).forEach(x => ch.append(el("span", "chip", x)));
+    d.append(ch); sk.append(d);
+  });
+
+  const cl = $("#certList"); cl.textContent = "";
+  (data.certifications || []).forEach(c => {
+    const d = el("div", "cert"); const ok = c.state !== "progress";
+    d.append(el("span", "tick " + (ok ? "ok" : "progress"), ok ? "✓ " + u.ok : "◷ " + u.progress), el("span", null, T(c.name)));
+    cl.append(d);
+  });
+  const ed = $("#eduList"); ed.textContent = "";
+  (data.education || []).forEach(e => {
+    const d = el("div", "edu"); d.append(el("b", null, T(e.degree)));
+    const s = el("span"); s.append(el("span", "sc", e.school), " · " + e.years); d.append(s); ed.append(d);
+  });
+  $("#langsTxt").textContent = T(data.languages);
+
+  const ct = data.contact;
+  $("#contactMsg").textContent = T(ct.message);
+  $("#mail").textContent = ct.email; $("#mail").href = "mailto:" + ct.email;
+  $("#linkedin").href = ct.linkedin;
+  $("#loc").textContent = "📍 " + T(ct.location);
+  $("#foot").textContent = "© " + new Date().getFullYear() + " Ismail Haiber · " + u.footer;
+  $("#photo").src = data.files.photo;
+  document.querySelectorAll(".cvbtn").forEach(a => a.href = data.files.cv);
+}
+
+/* typing line */
+let typeTimer, typeToken = 0;
+function startTyping(list) {
+  const out = $("#typed"); clearTimeout(typeTimer); const tok = ++typeToken;
+  if (!list.length) { out.textContent = ""; return; }
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { out.textContent = list[0]; return; }
+  let i = 0, n = 0, del = false;
+  const tick = () => {
+    if (tok !== typeToken) return;
+    const s = list[i]; out.textContent = s.slice(0, n);
+    if (!del && n < s.length) { n++; typeTimer = setTimeout(tick, 42); }
+    else if (!del) { del = true; typeTimer = setTimeout(tick, 1700); }
+    else if (n > 0) { n--; typeTimer = setTimeout(tick, 18); }
+    else { del = false; i = (i + 1) % list.length; typeTimer = setTimeout(tick, 250); }
+  };
+  out.textContent = list[0]; n = list[0].length; del = false;
+  typeTimer = setTimeout(() => { del = true; tick(); }, 1800);
+}
+
+function setLang(l) { lang = l; try { localStorage.setItem("i3000-lang", l); } catch (e) {} render(); }
+$("#lang-fr").onclick = () => setLang("fr");
+$("#lang-en").onclick = () => setLang("en");
+
+/* copy email */
+$("#copyMail").onclick = async () => {
+  const u = UI[lang];
+  try { await navigator.clipboard.writeText(data.contact.email); $("#note").textContent = u.copied; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents($("#mail")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("#note").textContent = u.copyfail; }
+};
+
+/* ---------- boot ---------- */
+async function boot() {
+  try { const r = await fetch("data.json", { cache: "no-store" }); data = await r.json(); }
+  catch (e) { document.body.insertAdjacentHTML("afterbegin", "<p style='padding:90px 20px;text-align:center'>Chargement impossible, rechargez la page.</p>"); return; }
+  render();
+}
+boot();
+})();
+</script>
+
+</body>
+</html>

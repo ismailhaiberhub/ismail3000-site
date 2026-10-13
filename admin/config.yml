@@ -1,0 +1,228 @@
+# Administration du site Ismail 3000 (Decap CMS)
+# Connexion via GitHub : seuls les comptes ayant les droits d'écriture
+# sur le dépôt peuvent modifier et publier.
+backend:
+  name: github
+  repo: ismailhaiberhub/ismail3000-site
+  branch: main
+  commit_messages:
+    update: "Mise à jour du site depuis l'admin"
+    uploadMedia: "Ajout du fichier {{path}}"
+
+locale: fr
+site_url: /
+display_url: /
+media_folder: uploads
+public_folder: uploads
+
+collections:
+  - name: site
+    label: Site
+    editor: { preview: false }
+    files:
+      - name: contenu
+        label: Contenu du site
+        file: data.json
+        format: json
+        fields:
+          - label: Statut (badge de l'accueil)
+            name: status
+            widget: object
+            collapsed: false
+            fields:
+              - label: Couleur du badge
+                name: kind
+                widget: select
+                options:
+                  - { label: "En poste (ambre)", value: cdi }
+                  - { label: "Disponible (vert)", value: available }
+                  - { label: "En mission (cyan)", value: mission }
+                  - { label: "Indisponible (rose)", value: unavailable }
+              - label: Texte du badge
+                name: label
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+
+          - label: Accueil
+            name: hero
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Nom en néon", name: name, widget: string }
+              - label: Slogan (signature)
+                name: tagline
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - label: Titre
+                name: title
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - { label: Domaines, name: scope, widget: string }
+              - label: Lignes du terminal (une par ligne)
+                name: typed
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: text }
+                  - { label: Anglais, name: en, widget: text }
+
+          - label: À propos
+            name: about
+            widget: object
+            collapsed: true
+            fields:
+              - label: Texte (ligne vide entre deux paragraphes)
+                name: text
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: text }
+                  - { label: Anglais, name: en, widget: text }
+              - label: Chiffres clés
+                name: stats
+                widget: list
+                summary: "{{fields.value}}"
+                fields:
+                  - { label: Valeur, name: value, widget: string }
+                  - label: Libellé
+                    name: label
+                    widget: object
+                    fields:
+                      - { label: Français, name: fr, widget: string }
+                      - { label: Anglais, name: en, widget: string }
+
+          - label: Services
+            name: services
+            widget: list
+            collapsed: true
+            summary: "{{fields.title.fr}}"
+            fields:
+              - label: Titre
+                name: title
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - label: Description
+                name: text
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: text }
+                  - { label: Anglais, name: en, widget: text }
+              - { label: Mots-clés, name: tags, widget: string }
+
+          - label: Parcours
+            name: experience
+            widget: list
+            collapsed: true
+            summary: "{{fields.company}}"
+            fields:
+              - label: Poste
+                name: role
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - { label: Entreprise / mission, name: company, widget: string }
+              - label: Période
+                name: period
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - { label: Lieu, name: place, widget: string }
+              - label: Réalisations (une par ligne)
+                name: points
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: text }
+                  - { label: Anglais, name: en, widget: text }
+              - { label: Stack, name: stack, widget: string, required: false }
+
+          - label: Stack technique
+            name: skills
+            widget: list
+            collapsed: true
+            summary: "{{fields.group.fr}}"
+            fields:
+              - label: Catégorie
+                name: group
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - { label: "Outils (séparés par des virgules)", name: items, widget: string }
+
+          - label: Certifications
+            name: certifications
+            widget: list
+            collapsed: true
+            summary: "{{fields.name.fr}}"
+            fields:
+              - label: Nom
+                name: name
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - label: État
+                name: state
+                widget: select
+                options:
+                  - { label: Obtenue, value: ok }
+                  - { label: En cours, value: progress }
+
+          - label: Formation
+            name: education
+            widget: list
+            collapsed: true
+            summary: "{{fields.school}}"
+            fields:
+              - label: Diplôme
+                name: degree
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - { label: École, name: school, widget: string }
+              - { label: Années, name: years, widget: string }
+
+          - label: Langues parlées
+            name: languages
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Français, name: fr, widget: string }
+              - { label: Anglais, name: en, widget: string }
+
+          - label: Contact
+            name: contact
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Email, name: email, widget: string }
+              - { label: Lien LinkedIn, name: linkedin, widget: string }
+              - label: Localisation
+                name: location
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - label: Message d'invitation
+                name: message
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: text }
+                  - { label: Anglais, name: en, widget: text }
+
+          - label: Photo et CV
+            name: files
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Photo, name: photo, widget: image }
+              - { label: CV (PDF), name: cv, widget: file }

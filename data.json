@@ -1,0 +1,181 @@
+{
+  "status": {
+    "kind": "cdi",
+    "label": { "fr": "Actuellement en poste (CDI)", "en": "Currently employed (full-time)" }
+  },
+  "hero": {
+    "name": "ISMAIL 3000",
+    "tagline": { "fr": "Au-delà de la qualité", "en": "Beyond quality" },
+    "title": { "fr": "Ingénieur QA Full-Stack", "en": "Full-Stack QA Engineer" },
+    "scope": "Web · Mobile · API · IA",
+    "typed": {
+      "fr": "Automatisation des tests web et mobile\nFrameworks construits de zéro\nTests d'API et intégration CI/CD\nTests d'agents IA\nStratégie qualité et KPIs",
+      "en": "Web and mobile test automation\nFrameworks built from scratch\nAPI testing and CI/CD integration\nAI agent testing\nQuality strategy and KPIs"
+    }
+  },
+  "about": {
+    "text": {
+      "fr": "Ingénieur QA Automation senior, je conçois des stratégies de test et des frameworks d'automatisation de zéro, sur le web, le mobile et les API, puis je les branche à la CI pour que les équipes livrent plus vite et avec moins de régressions.\n\nAujourd'hui Référent QA chez NATAN en mission chez PMU, j'accompagne aussi les consultants et le cadrage technique chez les clients. Je teste des agents IA et je prépare la certification ISTQB AI Testing.",
+      "en": "Senior QA Automation Engineer, I design test strategies and automation frameworks from scratch across web, mobile and APIs, then plug them into CI so teams ship faster with fewer regressions.\n\nCurrently QA Lead Referent at NATAN on assignment at PMU, I also coach consultants and frame technical work with clients. I test AI agents and I am preparing the ISTQB AI Testing certification."
+    },
+    "stats": [
+      { "value": "7+", "label": { "fr": "ans d'expérience", "en": "years of experience" } },
+      { "value": "8", "label": { "fr": "entreprises et missions", "en": "companies and assignments" } },
+      { "value": "10+", "label": { "fr": "outils d'automatisation", "en": "automation tools" } },
+      { "value": "4", "label": { "fr": "langues parlées", "en": "languages spoken" } }
+    ]
+  },
+  "services": [
+    {
+      "title": { "fr": "Audit & stratégie de test", "en": "Test audit & strategy" },
+      "text": { "fr": "État des lieux de votre QA, benchmark d'outils, plan de test aligné ISTQB et KPIs qualité suivis en sprint.", "en": "Assessment of your QA, tool benchmark, ISTQB-aligned test plan and quality KPIs tracked every sprint." },
+      "tags": "ISTQB · KPIs · Benchmark"
+    },
+    {
+      "title": { "fr": "Automatisation web", "en": "Web automation" },
+      "text": { "fr": "Framework de tests end-to-end posé de zéro : architecture, bonnes pratiques, parallélisation et reporting.", "en": "End-to-end test framework built from scratch: architecture, best practices, parallel runs and reporting." },
+      "tags": "Playwright · Cypress · WebdriverIO"
+    },
+    {
+      "title": { "fr": "Automatisation mobile", "en": "Mobile automation" },
+      "text": { "fr": "Tests Android et iOS automatisés, et migration de suites existantes vers des outils plus rapides et plus stables.", "en": "Automated Android and iOS tests, and migration of existing suites to faster, more stable tools." },
+      "tags": "Maestro · Appium"
+    },
+    {
+      "title": { "fr": "Tests d'API", "en": "API testing" },
+      "text": { "fr": "Validation des contrats et des parcours métier côté API, automatisée et rejouée à chaque build.", "en": "Contract and business-flow validation at API level, automated and replayed on every build." },
+      "tags": "Postman · Karate · Axios"
+    },
+    {
+      "title": { "fr": "Tests d'agents IA", "en": "AI agent testing" },
+      "text": { "fr": "Scénarios de test pour agents et assistants IA : pertinence des réponses, robustesse, cas limites et non-régression.", "en": "Test scenarios for AI agents and assistants: answer relevance, robustness, edge cases and regression." },
+      "tags": "ISTQB AI Testing"
+    },
+    {
+      "title": { "fr": "CI/CD & accompagnement", "en": "CI/CD & coaching" },
+      "text": { "fr": "Intégration des tests à la CI, montée en compétences des équipes et animation des rituels QA (Three Amigos).", "en": "Test integration into CI, team upskilling and QA rituals such as Three Amigos." },
+      "tags": "Jenkins · Allure · Jira"
+    }
+  ],
+  "experience": [
+    {
+      "role": { "fr": "Senior QA Consultant & Référent QA", "en": "Senior QA Consultant & QA Referent" },
+      "company": "NATAN · mission PMU",
+      "period": { "fr": "Nov. 2025 – aujourd'hui", "en": "Nov 2025 – present" },
+      "place": "Paris",
+      "points": {
+        "fr": "Migration des tests mobiles d'Appium (Java, Cucumber) vers Maestro\nMise en place de l'automatisation web avec Playwright, projets créés de zéro\nObjectifs trimestriels et KPIs d'automatisation présentés en sprint review\nRéférent QA : recrutement, bonnes pratiques et accompagnement des consultants",
+        "en": "Migrated mobile tests from Appium (Java, Cucumber) to Maestro\nSet up web automation with Playwright, projects built from scratch\nQuarterly automation goals and KPIs presented at sprint reviews\nQA referent: hiring, best practices and consultant coaching"
+      },
+      "stack": "Playwright · Maestro · Appium · Cucumber · Jira"
+    },
+    {
+      "role": { "fr": "QA Automation Engineer", "en": "QA Automation Engineer" },
+      "company": "APRIL International",
+      "period": { "fr": "Sept. 2023 – sept. 2025", "en": "Sep 2023 – Sep 2025" },
+      "place": "Paris",
+      "points": {
+        "fr": "Benchmark d'outils et framework d'automatisation aligné ISTQB\nRégressions end-to-end web et mobile, portails B2C et tarification\nJobs Jenkins, parallélisation des tests et reporting KPI avec Allure",
+        "en": "Tool benchmark and ISTQB-aligned automation framework\nEnd-to-end web and mobile regression, B2C portals and pricing\nJenkins jobs, parallel test runs and KPI reporting with Allure"
+      },
+      "stack": "TypeScript · Cypress · WebdriverIO · Appium · Karate · Jenkins"
+    },
+    {
+      "role": { "fr": "Software QA Engineer", "en": "Software QA Engineer" },
+      "company": "Trusk",
+      "period": { "fr": "Déc. 2022 – sept. 2023", "en": "Dec 2022 – Sep 2023" },
+      "place": "Paris",
+      "points": {
+        "fr": "Refonte du process de gestion des bugs\nÉvolutions du framework d'automatisation et revues de code\nAutomatisation des tests API",
+        "en": "Redesigned the bug management process\nAutomation framework features and code reviews\nAPI test automation"
+      },
+      "stack": "WebdriverIO · Jest · TypeScript · Node.js"
+    },
+    {
+      "role": { "fr": "Software QA Engineer", "en": "Software QA Engineer" },
+      "company": "OVHcloud",
+      "period": { "fr": "Oct. 2022 – déc. 2022", "en": "Oct 2022 – Dec 2022" },
+      "place": "Paris",
+      "points": {
+        "fr": "Qualification du projet VMware Private Cloud par l'automatisation des appels API\nIntroduction de la culture QA dans l'équipe",
+        "en": "Qualified the VMware Private Cloud project through API call automation\nIntroduced a QA culture in the team"
+      },
+      "stack": "Venom · YAML · Xray · Jira"
+    },
+    {
+      "role": { "fr": "Lead QA Engineer", "en": "Lead QA Engineer" },
+      "company": "Enovacom",
+      "period": { "fr": "Déc. 2020 – oct. 2022", "en": "Dec 2020 – Oct 2022" },
+      "place": "Marseille",
+      "points": {
+        "fr": "Stratégie de test d'une plateforme SaaS d'échanges de données de santé\nNon-régression automatisée avec Selenium et Cucumber\nTests de performance et de charge, backup PO et Scrum Master",
+        "en": "Test strategy for a SaaS healthcare data exchange platform\nAutomated regression with Selenium and Cucumber\nPerformance and load testing, PO and Scrum Master backup"
+      },
+      "stack": "Selenium · Cucumber · Java · AWS"
+    },
+    {
+      "role": { "fr": "QA Engineer Salesforce", "en": "Salesforce QA Engineer" },
+      "company": "AXA",
+      "period": { "fr": "Mars 2020 – sept. 2020", "en": "Mar 2020 – Sep 2020" },
+      "place": "Lille",
+      "points": {
+        "fr": "Stratégie et plan de test du déploiement du CRM Salesforce, mobilité iPad et iPhone\nLivraison en production dans les délais",
+        "en": "Test strategy and plan for the Salesforce CRM rollout, iPad and iPhone mobility\nDelivered to production on schedule"
+      },
+      "stack": "Salesforce"
+    },
+    {
+      "role": { "fr": "Technical Support QA", "en": "Technical Support QA" },
+      "company": "Valeo",
+      "period": { "fr": "Sept. 2019 – mars 2020", "en": "Sep 2019 – Mar 2020" },
+      "place": "Créteil",
+      "points": {
+        "fr": "Analyse statique du code embarqué automobile, 8 projets livrés sans retard",
+        "en": "Static analysis of automotive embedded code, 8 projects delivered on time"
+      },
+      "stack": "Klocwork"
+    },
+    {
+      "role": { "fr": "Ingénieur logiciel Java EE", "en": "Java EE Software Engineer" },
+      "company": "HARMAN International",
+      "period": { "fr": "Juin 2019 – août 2019", "en": "Jun 2019 – Aug 2019" },
+      "place": "Casablanca",
+      "points": {
+        "fr": "Application web d'entretiens qui s'adapte au profil du candidat",
+        "en": "Adaptive web interview application tailored to each candidate"
+      },
+      "stack": "Java EE · Vue.js"
+    }
+  ],
+  "skills": [
+    { "group": { "fr": "Web", "en": "Web" }, "items": "Playwright, Cypress, WebdriverIO, Selenium" },
+    { "group": { "fr": "Mobile", "en": "Mobile" }, "items": "Maestro, Appium, Android, iOS" },
+    { "group": { "fr": "API", "en": "API" }, "items": "Postman, Karate, Axios, Venom" },
+    { "group": { "fr": "Langages & BDD", "en": "Languages & BDD" }, "items": "TypeScript, Java, Node.js, Cucumber" },
+    { "group": { "fr": "CI/CD & reporting", "en": "CI/CD & reporting" }, "items": "Jenkins, Git, Allure, Jest" },
+    { "group": { "fr": "Méthodes & outils", "en": "Methods & tools" }, "items": "Agile Scrum, Jira, Xray, Three Amigos" }
+  ],
+  "certifications": [
+    { "name": { "fr": "ISTQB Foundation Level", "en": "ISTQB Foundation Level" }, "state": "ok" },
+    { "name": { "fr": "ISTQB AI Testing", "en": "ISTQB AI Testing" }, "state": "progress" },
+    { "name": { "fr": "AWS Certified Cloud Practitioner", "en": "AWS Certified Cloud Practitioner" }, "state": "ok" },
+    { "name": { "fr": "Scrum Master", "en": "Scrum Master" }, "state": "ok" },
+    { "name": { "fr": "IREB", "en": "IREB" }, "state": "ok" },
+    { "name": { "fr": "Développeur web", "en": "Web developer" }, "state": "ok" }
+  ],
+  "education": [
+    { "degree": { "fr": "Diplôme d'ingénieur, Génie informatique", "en": "Engineering degree, Computer science" }, "school": "ENSA Marrakech", "years": "2015 – 2019" },
+    { "degree": { "fr": "Ingénierie des systèmes et management de projets", "en": "Systems engineering and project management" }, "school": "Polytech Angers", "years": "2019 – 2020" }
+  ],
+  "languages": { "fr": "Français · Arabe · Anglais · Allemand (notions)", "en": "French · Arabic · English · German (basic)" },
+  "contact": {
+    "email": "haiberismail@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/ismail-haiber/",
+    "location": { "fr": "Paris, Île-de-France", "en": "Paris, France" },
+    "message": {
+      "fr": "Un projet à fiabiliser, une équipe QA à lancer ou une suite de tests à remettre d'aplomb ? Écrivez-moi, je réponds sous 48 h.",
+      "en": "A product to make reliable, a QA team to launch or a test suite to fix? Drop me a line, I reply within 48 hours."
+    }
+  },
+  "files": { "photo": "photo.jpg", "cv": "cv-ismail-haiber.pdf" }
+}
