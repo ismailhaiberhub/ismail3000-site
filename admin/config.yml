@@ -5,6 +5,8 @@ backend:
   name: github
   repo: ismailhaiberhub/ismail3000-site
   branch: main
+  # Site Netlify utilisé pour la connexion GitHub (garde-le même après l'ajout d'un domaine)
+  site_domain: ismailhaiber.netlify.app
   commit_messages:
     update: "Mise à jour du site depuis l'admin"
     uploadMedia: "Ajout du fichier {{path}}"
