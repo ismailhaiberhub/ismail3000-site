@@ -1,0 +1,64 @@
+---
+import Base from "../layouts/Base.astro";
+import Social from "../components/Social.astro";
+import profil from "../content/profil.json";
+import reglages from "../content/reglages.json";
+import { UI, route, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = UI[lang];
+const ct = profil.contact;
+const rdv = reglages.contact.rendez_vous;
+const title = lang === "fr" ? "Contact · Ismail 3000" : "Contact · Ismail 3000";
+const description = t(ct.message, lang);
+---
+<Base lang={lang} title={title} description={description} routeKey="contact">
+  <section class="sec page-top contact">
+    <div class="wrap narrow">
+      <p class="label"><span class="k">expect</span>(<span class="s">{u.contact_label}</span>).<span class="k">toPass</span>()</p>
+      <h1 class="h2" set:html={u.contact_h} />
+      <p class="msg">{t(ct.message, lang)}</p>
+
+      <form class="form" name="contact" method="post" action={route("merci", lang)} data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p hidden><label>Ne pas remplir <input name="bot-field"></label></p>
+        <div class="row2">
+          <label>{u.f_name}<input name="nom" required autocomplete="name"></label>
+          <label>{u.f_email}<input type="email" name="email" required autocomplete="email"></label>
+        </div>
+        <label>{u.f_reason}
+          <select name="motif" required>
+            {u.f_reasons.map((r) => <option>{r}</option>)}
+          </select>
+        </label>
+        <label>{u.f_message}<textarea name="message" rows="6" required></textarea></label>
+        <button class="btn" type="submit">{u.f_send}</button>
+      </form>
+
+      <p class="or">{u.f_or}</p>
+      <div class="mailbox"><a id="mail" href={`mailto:${ct.email}`}>{ct.email}</a><button class="copy" id="copyMail" type="button" data-email={ct.email} data-ok={u.copied} data-fail={u.copyfail}>{u.copy}</button></div>
+      <div class="note" id="note" role="status"></div>
+      <div class="ctas">
+        {rdv && <a class="btn cy" href={rdv} target="_blank" rel="noopener">{u.rdv}</a>}
+      </div>
+      <Social />
+      <p class="loc">📍 {t(ct.location, lang)}</p>
+    </div>
+  </section>
+</Base>
+<script>
+  const btn = document.getElementById("copyMail") as HTMLButtonElement | null;
+  const note = document.getElementById("note");
+  btn?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.email || "");
+      if (note) note.textContent = btn.dataset.ok || "";
+    } catch {
+      const r = document.createRange();
+      r.selectNodeContents(document.getElementById("mail")!);
+      const s = getSelection(); s?.removeAllRanges(); s?.addRange(r);
+      if (note) note.textContent = btn.dataset.fail || "";
+    }
+  });
+</script>

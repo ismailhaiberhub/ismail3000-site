@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import profil from "../content/profil.json";
+import reglages from "../content/reglages.json";
+
+const email = profil.contact.email;
+const plausible = reglages.statistiques.plausible_domaine;
+---
+<Base lang="fr" title="Politique de confidentialité · Ismail 3000" description="Quelles données le site Ismail 3000 collecte, pourquoi, et comment exercer vos droits." routeKey="confidentialite">
+  <section class="sec page-top">
+    <div class="wrap narrow prose">
+      <h1 class="h2">Politique de <em>confidentialité</em></h1>
+      <p>Ce site collecte le minimum de données, uniquement quand vous les envoyez vous-même.</p>
+
+      <h2>Ce qui est collecté</h2>
+      <ul>
+        <li><b>Formulaire de contact</b> : nom, email, motif et message, pour vous répondre.</li>
+        <li><b>Newsletter</b> : votre email, pour vous envoyer la newsletter. Vous pouvez vous désinscrire à tout moment via le lien présent dans chaque email ou en m'écrivant.</li>
+        <li><b>Statistiques</b> : {plausible
+          ? "mesure d'audience anonyme avec Plausible, sans cookie et sans donnée personnelle."
+          : "aucune mesure d'audience n'est active pour le moment."}</li>
+      </ul>
+      <p>Le site ne dépose aucun cookie publicitaire ni traceur.</p>
+
+      <h2>Où vont vos données</h2>
+      <p>Les messages et inscriptions sont reçus via Netlify Forms (Netlify, Inc.). La newsletter peut être envoyée via Brevo (Sendinblue SAS, France). Vos données ne sont jamais vendues ni cédées.</p>
+
+      <h2>Durée de conservation</h2>
+      <p>Les messages de contact sont conservés 3 ans au plus après le dernier échange. Les emails de la newsletter sont conservés jusqu'à votre désinscription.</p>
+
+      <h2>Vos droits</h2>
+      <p>Conformément au RGPD, vous pouvez accéder à vos données, les rectifier ou les faire supprimer en écrivant à <a href={`mailto:${email}`}>{email}</a>. Vous pouvez aussi saisir la <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a>.</p>
+    </div>
+  </section>
+</Base>

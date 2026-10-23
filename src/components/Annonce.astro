@@ -1,0 +1,19 @@
+---
+import reglages from "../content/reglages.json";
+import { route, t, type Lang, type RouteKey, ROUTES } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const a = reglages.annonce;
+// Le lien accepte une page du site (« newsletter », « contact »...) ou une adresse complète.
+const href = a.lien in ROUTES ? route(a.lien as RouteKey, lang) : a.lien;
+const external = /^https?:/.test(href);
+---
+{a.actif && t(a.texte, lang) && (
+  <div class="annonce">
+    <div class="wrap">
+      <span>{t(a.texte, lang)}</span>
+      {href && <a href={href} {...(external ? { target: "_blank", rel: "noopener" } : {})}>{t(a.lien_texte, lang)} →</a>}
+    </div>
+  </div>
+)}

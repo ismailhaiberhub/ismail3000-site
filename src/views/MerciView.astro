@@ -1,0 +1,18 @@
+---
+import Base from "../layouts/Base.astro";
+import { UI, route, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = UI[lang];
+---
+<Base lang={lang} title={`${lang === "fr" ? "Merci" : "Thank you"} · Ismail 3000`} routeKey="merci" noindex>
+  <section class="sec page-top center">
+    <div class="wrap narrow">
+      <p class="label"><span class="k">expect</span>(<span class="s">'message'</span>).<span class="k">toBeVisible</span>()</p>
+      <h1 class="h2" set:html={u.thanks_h} />
+      <p class="msg">{u.thanks_p}</p>
+      <div class="ctas"><a class="btn cy" href={route("home", lang)}>{u.back_home}</a></div>
+    </div>
+  </section>
+</Base>

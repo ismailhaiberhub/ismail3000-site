@@ -1,0 +1,80 @@
+{
+  "site": {
+    "nom": "Ismail 3000",
+    "slogan": { "fr": "La QA de demain, augmentée par l'IA", "en": "Tomorrow's QA, augmented by AI" },
+    "description": {
+      "fr": "Ismail 3000, le site de référence de la QA augmentée par l'IA : news, kits à télécharger, agents IA de test et accompagnement des startups. Par Ismail Haiber, ingénieur QA Full-Stack à Paris.",
+      "en": "Ismail 3000, the reference for AI-augmented QA: news, downloadable kits, AI testing agents and support for startups. By Ismail Haiber, Full-Stack QA Engineer in Paris."
+    },
+    "image_partage": "/og-image.png"
+  },
+  "annonce": {
+    "actif": true,
+    "texte": {
+      "fr": "Nouveau : le site devient un média QA x IA. News, kits et agents arrivent bientôt.",
+      "en": "New: this site is becoming a QA x AI media. News, kits and agents are coming soon."
+    },
+    "lien_texte": { "fr": "Être prévenu", "en": "Get notified" },
+    "lien": "newsletter"
+  },
+  "accueil": {
+    "intro": {
+      "fr": "Le point de rendez-vous de la QA futuriste en France : l'actualité des tests et de l'IA, des kits prêts à l'emploi et des agents IA qui testent pour vous.",
+      "en": "The meeting point for futuristic QA in France: testing and AI news, ready-to-use kits and AI agents that test for you."
+    },
+    "rubriques": [
+      {
+        "titre": { "fr": "News QA x IA", "en": "QA x AI news" },
+        "texte": { "fr": "L'actualité des tests, des outils et de l'IA, triée et commentée.", "en": "Testing, tooling and AI news, curated and commented." },
+        "icone": "news",
+        "statut": "bientot",
+        "lien": ""
+      },
+      {
+        "titre": { "fr": "Téléchargements", "en": "Downloads" },
+        "texte": { "fr": "Stratégie de test, plan de test, checklists et prompts IA prêts à l'emploi.", "en": "Ready-to-use test strategy, test plan, checklists and AI prompts." },
+        "icone": "kit",
+        "statut": "bientot",
+        "lien": ""
+      },
+      {
+        "titre": { "fr": "Starter kit startups", "en": "Startup starter kit" },
+        "texte": { "fr": "Pas encore de QA ? Les bases en un jour, l'automatisation en un mois.", "en": "No QA yet? The basics in a day, automation in a month." },
+        "icone": "rocket",
+        "statut": "bientot",
+        "lien": ""
+      },
+      {
+        "titre": { "fr": "Agents IA", "en": "AI agents" },
+        "texte": { "fr": "Des agents qui testent dans votre CI/CD, écrivent vos tests unitaires et trient vos bugs.", "en": "Agents that test in your CI/CD, write your unit tests and triage your bugs." },
+        "icone": "bot",
+        "statut": "bientot",
+        "lien": ""
+      }
+    ],
+    "startups": {
+      "titre": { "fr": "La QA pour les startups", "en": "QA for startups" },
+      "etapes": [
+        { "titre": { "fr": "Je n'ai pas de QA", "en": "I have no QA" }, "texte": { "fr": "On mesure votre maturité et on liste les risques qui comptent.", "en": "We measure your maturity and list the risks that matter." } },
+        { "titre": { "fr": "Je pose les bases", "en": "I lay the foundations" }, "texte": { "fr": "Stratégie, plan de test et premiers tests automatisés sur les parcours clés.", "en": "Strategy, test plan and first automated tests on key flows." } },
+        { "titre": { "fr": "J'automatise avec l'IA", "en": "I automate with AI" }, "texte": { "fr": "Des agents IA dans la CI pour tester à chaque commit.", "en": "AI agents in CI to test on every commit." } }
+      ]
+    }
+  },
+  "contact": {
+    "rendez_vous": ""
+  },
+  "reseaux": [
+    { "nom": "LinkedIn", "url": "https://www.linkedin.com/in/ismail-haiber/" }
+  ],
+  "newsletter": {
+    "texte": {
+      "fr": "Toutes les deux semaines : les news QA x IA qui comptent, un kit et l'avancée des agents. Pas de spam, désinscription en un clic.",
+      "en": "Every two weeks: the QA x AI news that matter, one kit and agent progress. No spam, one-click unsubscribe."
+    },
+    "brevo_action": ""
+  },
+  "statistiques": {
+    "plausible_domaine": ""
+  }
+}

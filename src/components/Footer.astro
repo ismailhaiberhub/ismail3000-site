@@ -1,0 +1,19 @@
+---
+import Social from "./Social.astro";
+import { UI, route, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = UI[lang];
+---
+<footer>
+  <div class="logo">ISMAIL <b>3000</b></div>
+  <Social />
+  <nav class="footlinks" aria-label={u.legal}>
+    <a href={route("newsletter", lang)}>{u.nav_newsletter}</a>
+    <a href={route("contact", lang)}>{u.nav_contact}</a>
+    <a href={route("mentions", lang)}>{u.legal}</a>
+    <a href={route("confidentialite", lang)}>{u.privacy_title}</a>
+  </nav>
+  <div>© {new Date().getFullYear()} Ismail Haiber · {u.footer_role}</div>
+</footer>

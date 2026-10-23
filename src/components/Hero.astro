@@ -1,0 +1,44 @@
+---
+import profil from "../content/profil.json";
+import Status from "./Status.astro";
+import { lines, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang; compact?: boolean; subtitle?: string }
+const { lang, compact = false, subtitle } = Astro.props;
+const h = profil.hero;
+const m = String(h.name || "").match(/^(.*?)(\s*\d+)$/);
+const typed = lines(t(h.typed, lang));
+---
+<header class:list={["hero", { compact }]}>
+  <div class="floor"><i></i></div>
+  <span class="shape s1"></span><span class="shape s2"></span><span class="shape s3"></span><span class="shape s4"></span>
+  <div class="wrap">
+    <Status lang={lang} />
+    <p class="neon">{m ? <>{m[1]}<span class="n3">{m[2]}</span></> : h.name}</p>
+    <div><p class="sign">{t(h.tagline, lang)}</p></div>
+    <slot name="title" />
+    {subtitle && <p class="scope">{subtitle}</p>}
+    <div class="term" aria-live="off">
+      <div><span class="p">$</span> <span class="t">npx playwright test --project=ismail</span></div>
+      <div><span class="ok">✓</span> <span class="typed" data-lines={JSON.stringify(typed)}>{typed[0]}</span><span class="caret"></span></div>
+    </div>
+    <div class="ctas"><slot /></div>
+  </div>
+</header>
+<script>
+  // Ligne de terminal qui tape et efface chaque élément à tour de rôle.
+  document.querySelectorAll<HTMLElement>(".typed").forEach((out) => {
+    const list: string[] = JSON.parse(out.dataset.lines || "[]");
+    if (list.length < 2 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let i = 0, n = list[0].length, del = true;
+    const tick = () => {
+      const s = list[i];
+      out.textContent = s.slice(0, n);
+      if (!del && n < s.length) { n++; setTimeout(tick, 42); }
+      else if (!del) { del = true; setTimeout(tick, 1700); }
+      else if (n > 0) { n--; setTimeout(tick, 18); }
+      else { del = false; i = (i + 1) % list.length; setTimeout(tick, 250); }
+    };
+    setTimeout(tick, 1800);
+  });
+</script>

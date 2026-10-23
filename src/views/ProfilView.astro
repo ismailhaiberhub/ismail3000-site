@@ -1,0 +1,158 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import CvLink from "../components/CvLink.astro";
+import profil from "../content/profil.json";
+import { UI, lines, paragraphs, route, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = UI[lang];
+const site = Astro.site!;
+const h = profil.hero;
+
+const ICONS = [
+  '<path d="M3 12h4l3-8 4 16 3-8h4"/>',
+  '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9l3 3-3 3M13 15h4"/>',
+  '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+  '<path d="M8 4 3 12l5 8M16 4l5 8-5 8M14 4l-4 16"/>',
+  '<rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6M2 12h3M19 12h3"/>',
+  '<path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 10A8 8 0 0 0 6 5L4 10M4 14a8 8 0 0 0 14 5l2-5"/>',
+];
+
+const current = profil.experience[0];
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    "@id": new URL("/#ismail", site).href,
+    name: "Ismail Haiber",
+    alternateName: "Ismail 3000",
+    jobTitle: t(h.title, lang),
+    description: paragraphs(t(profil.about.text, lang))[0],
+    url: new URL(route("profil", lang), site).href,
+    image: new URL(profil.files.photo, site).href,
+    email: "mailto:" + profil.contact.email,
+    address: { "@type": "PostalAddress", addressLocality: "Paris", addressRegion: "Île-de-France", addressCountry: "FR" },
+    worksFor: current ? { "@type": "Organization", name: current.company.split("·")[0].trim() } : undefined,
+    alumniOf: profil.education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.school })),
+    hasCredential: profil.certifications.filter((c) => c.state === "ok").map((c) => ({ "@type": "EducationalOccupationalCredential", name: t(c.name, lang) })),
+    knowsAbout: profil.skills.flatMap((g) => g.items.split(",").map((x) => x.trim())),
+    sameAs: [profil.contact.linkedin],
+  },
+};
+const title = lang === "fr"
+  ? `Ismail Haiber · ${t(h.title, "fr")} à Paris | Ismail 3000`
+  : `Ismail Haiber · ${t(h.title, "en")} in Paris | Ismail 3000`;
+const description = lang === "fr"
+  ? "Ismail Haiber, ingénieur QA Full-Stack senior à Paris : automatisation des tests web, mobile et API (Playwright, Cypress, Maestro, Appium) et tests d'agents IA."
+  : "Ismail Haiber, senior Full-Stack QA Engineer in Paris: web, mobile and API test automation (Playwright, Cypress, Maestro, Appium) and AI agent testing.";
+---
+<Base lang={lang} title={title} description={description} routeKey="profil" ogType="profile" jsonld={jsonld}>
+  <Hero lang={lang} subtitle={h.scope}>
+    <h1 class="role" slot="title"><span class="who">Ismail Haiber</span><span class="sep"> · </span><span>{t(h.title, lang)}</span></h1>
+    <a class="btn" href={route("contact", lang)}>{u.cta_contact}</a>
+    <a class="btn cy" href="#services">{lang === "fr" ? "Mes services" : "My services"}</a>
+    <CvLink lang={lang} />
+  </Hero>
+
+  <section class="sec" id="about">
+    <div class="wrap about">
+      <div class="ph"><img src={profil.files.photo} alt={`Ismail Haiber, ${t(h.title, lang)}`} width="560" height="560"></div>
+      <div class="txt">
+        <p class="label"><span class="k">describe</span>(<span class="s">'{u.about_label}'</span>)</p>
+        <h2 set:html={u.about_h} />
+        {paragraphs(t(profil.about.text, lang)).map((p) => <p>{p}</p>)}
+        <div class="stats">
+          {profil.about.stats.map((s) => <div class="stat"><b>{s.value}</b><span>{t(s.label, lang)}</span></div>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="services">
+    <div class="wrap">
+      <p class="label"><span class="k">describe</span>(<span class="s">'services'</span>)</p>
+      <h2 set:html={u.serv_h} />
+      <div class="cards">
+        {profil.services.map((s, i) => (
+          <article class="card">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={ICONS[i % ICONS.length]} />
+            <h3>{t(s.title, lang)}</h3>
+            <p>{t(s.text, lang)}</p>
+            <div class="tags">{s.tags}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="parcours">
+    <div class="wrap">
+      <p class="label"><span class="k">describe</span>(<span class="s">'{u.path_label}'</span>)</p>
+      <h2 set:html={u.path_h} />
+      <ol class="tl">
+        {profil.experience.map((j) => (
+          <li class="job">
+            <div class="when"><b>{t(j.period, lang)}</b><span>{j.place}</span></div>
+            <div>
+              <h3>{t(j.role, lang)}</h3>
+              <div class="co">{j.company}</div>
+              <ul>{lines(t(j.points, lang)).map((p) => <li>{p}</li>)}</ul>
+              {j.stack && <div class="st">{j.stack}</div>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="stack">
+    <div class="wrap">
+      <p class="label"><span class="k">describe</span>(<span class="s">'stack'</span>)</p>
+      <h2 set:html={u.stack_h} />
+      <div class="skills">
+        {profil.skills.map((g) => (
+          <div class="sk">
+            <h3>// {t(g.group, lang)}</h3>
+            <div class="chips">{g.items.split(",").map((x) => x.trim()).filter(Boolean).map((x) => <span class="chip">{x}</span>)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="certs">
+    <div class="wrap two">
+      <div>
+        <p class="label"><span class="k">describe</span>(<span class="s">'certifications'</span>)</p>
+        <h2 set:html={u.cert_h} />
+        {profil.certifications.map((c) => {
+          const ok = c.state !== "progress";
+          return <div class="cert"><span class:list={["tick", ok ? "ok" : "progress"]}>{ok ? "✓ " + u.ok : "◷ " + u.progress}</span><span>{t(c.name, lang)}</span></div>;
+        })}
+      </div>
+      <div>
+        <p class="label"><span class="k">describe</span>(<span class="s">'{u.edu_label}'</span>)</p>
+        <h2 set:html={u.edu_h} />
+        {profil.education.map((e) => (
+          <div class="edu"><b>{t(e.degree, lang)}</b><span><span class="sc">{e.school}</span> · {e.years}</span></div>
+        ))}
+        <div class="langs"><b>{u.langs}</b><span>{t(profil.languages, lang)}</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec contact">
+    <div class="wrap">
+      <p class="label"><span class="k">expect</span>(<span class="s">{u.contact_label}</span>).<span class="k">toPass</span>()</p>
+      <h2 set:html={u.contact_h} />
+      <p class="msg">{t(profil.contact.message, lang)}</p>
+      <div class="ctas">
+        <a class="btn" href={route("contact", lang)}>{u.cta_contact}</a>
+        <CvLink lang={lang} />
+      </div>
+    </div>
+  </section>
+</Base>
