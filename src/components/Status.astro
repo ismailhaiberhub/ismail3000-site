@@ -1,0 +1,8 @@
+---
+import profil from "../content/profil.json";
+import { t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const st = profil.status;
+---
+<div class="status" data-kind={st.kind || "cdi"}><span class="dot"></span><span>{t(st.label, Astro.props.lang)}</span></div>

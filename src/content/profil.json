@@ -177,5 +177,5 @@
       "en": "A product to make reliable, a QA team to launch or a test suite to fix? Drop me a line, I reply within 48 hours."
     }
   },
-  "files": { "photo": "photo.jpg", "cv": "cv-ismail-haiber.pdf" }
+  "files": { "photo": "/photo.jpg", "cv": "/cv-ismail-haiber.pdf" }
 }

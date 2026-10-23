@@ -1,0 +1,113 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import Status from "../components/Status.astro";
+import Social from "../components/Social.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
+import profil from "../content/profil.json";
+import reglages from "../content/reglages.json";
+import { UI, route, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = UI[lang];
+const site = Astro.site!;
+const acc = reglages.accueil;
+
+const ICONS: Record<string, string> = {
+  news: '<path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 13h5M8 17h3"/>',
+  kit: '<path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/>',
+  rocket: '<path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M9 12a12 12 0 0 1 11-9 12 12 0 0 1-9 11l-2 1-2-2z"/><circle cx="15" cy="9" r="1.5"/>',
+  bot: '<rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6M2 12h3M19 12h3"/>',
+};
+
+const jsonld = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": new URL("/#site", site).href,
+      url: new URL("/", site).href,
+      name: reglages.site.nom,
+      description: t(reglages.site.description, lang),
+      inLanguage: lang === "fr" ? "fr-FR" : "en-US",
+      publisher: { "@id": new URL("/#ismail", site).href },
+    },
+    {
+      "@type": "Person",
+      "@id": new URL("/#ismail", site).href,
+      name: "Ismail Haiber",
+      alternateName: "Ismail 3000",
+      jobTitle: t(profil.hero.title, lang),
+      url: new URL(route("profil", lang), site).href,
+      image: new URL(profil.files.photo, site).href,
+      sameAs: reglages.reseaux.map((r) => r.url).filter(Boolean),
+    },
+  ],
+};
+const title = lang === "fr"
+  ? "Ismail 3000 · La QA de demain, augmentée par l'IA"
+  : "Ismail 3000 · Tomorrow's QA, augmented by AI";
+---
+<Base lang={lang} title={title} routeKey="home" jsonld={jsonld}>
+  <Hero lang={lang} compact subtitle={t(reglages.site.slogan, lang)}>
+    <h1 class="sr" slot="title">{title}</h1>
+    <a class="btn" href={route("newsletter", lang)}>{lang === "fr" ? "Être prévenu des nouveautés" : "Get notified"}</a>
+    <a class="btn cy" href={route("profil", lang)}>{u.cta_profil}</a>
+  </Hero>
+
+  <section class="sec home">
+    <div class="wrap home-grid">
+      <div class="home-main">
+        <p class="label"><span class="k">describe</span>(<span class="s">'{u.home_offer_label}'</span>)</p>
+        <h2 set:html={u.home_offer_h} />
+        <p class="lead">{t(acc.intro, lang)}</p>
+        <div class="cards two-cols">
+          {acc.rubriques.map((r) => {
+            const live = r.statut === "disponible" && r.lien;
+            const Tag = live ? "a" : "article";
+            return (
+              <Tag class:list={["card", "rub", { soon: !live }]} href={live ? r.lien : undefined}>
+                <span class:list={["badge", live ? "on" : "off"]}>{live ? u.available : u.soon}</span>
+                <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={ICONS[r.icone] ?? ICONS.news} />
+                <h3>{t(r.titre, lang)}</h3>
+                <p>{t(r.texte, lang)}</p>
+              </Tag>
+            );
+          })}
+        </div>
+
+        <div class="startups">
+          <p class="label"><span class="k">describe</span>(<span class="s">'startups'</span>)</p>
+          <h2>{t(acc.startups.titre, lang)}</h2>
+          <ol class="steps">
+            {acc.startups.etapes.map((e, i) => (
+              <li><span class="num">0{i + 1}</span><h3>{t(e.titre, lang)}</h3><p>{t(e.texte, lang)}</p></li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <aside class="home-side">
+        <div class="side-card me">
+          <p class="subh">// {u.whoami}</p>
+          <img src={profil.files.photo} alt="Ismail Haiber" width="96" height="96" loading="lazy">
+          <h3>Ismail Haiber</h3>
+          <p class="muted">{t(profil.hero.title, lang)} · {profil.hero.scope}</p>
+          <Status lang={lang} />
+          <a class="btn cy small" href={route("profil", lang)}>{u.cta_profil}</a>
+        </div>
+        <div class="side-card">
+          <p class="subh">// newsletter</p>
+          <h3 set:html={u.nl_h} />
+          <p class="muted">{t(reglages.newsletter.texte, lang)}</p>
+          <NewsletterForm lang={lang} source="accueil" />
+        </div>
+        <div class="side-card">
+          <p class="subh">// {u.follow}</p>
+          <Social />
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>

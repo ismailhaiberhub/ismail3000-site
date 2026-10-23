@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
+import reglages from "../content/reglages.json";
+import { UI, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = UI[lang];
+const title = lang === "fr" ? "Newsletter QA du futur · Ismail 3000" : "Future QA newsletter · Ismail 3000";
+---
+<Base lang={lang} title={title} description={t(reglages.newsletter.texte, lang)} routeKey="newsletter">
+  <section class="sec page-top center">
+    <div class="wrap narrow">
+      <p class="label"><span class="k">subscribe</span>(<span class="s">'newsletter'</span>)</p>
+      <h1 class="h2" set:html={u.nl_h} />
+      <p class="msg">{t(reglages.newsletter.texte, lang)}</p>
+      <NewsletterForm lang={lang} source="page-newsletter" />
+    </div>
+  </section>
+</Base>

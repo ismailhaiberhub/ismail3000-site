@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import { UI, route } from "../i18n/ui";
+
+const u = UI.fr;
+---
+<Base lang="fr" title="Page introuvable · Ismail 3000" noindex>
+  <section class="sec page-top center">
+    <div class="wrap narrow">
+      <p class="label"><span class="k">expect</span>(<span class="s">'page'</span>).<span class="k">toExist</span>() <span class="ko">✗ 404</span></p>
+      <h1 class="h2" set:html={u.nf_h} />
+      <p class="msg">{u.nf_p}</p>
+      <div class="ctas"><a class="btn cy" href={route("home", "fr")}>{u.back_home}</a></div>
+    </div>
+  </section>
+</Base>

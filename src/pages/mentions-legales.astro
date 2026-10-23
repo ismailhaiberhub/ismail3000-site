@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import profil from "../content/profil.json";
+import { route } from "../i18n/ui";
+
+const email = profil.contact.email;
+---
+<Base lang="fr" title="Mentions légales · Ismail 3000" description="Mentions légales du site Ismail 3000 : éditeur, hébergeur, propriété intellectuelle et données personnelles." routeKey="mentions">
+  <section class="sec page-top">
+    <div class="wrap narrow prose">
+      <h1 class="h2">Mentions <em>légales</em></h1>
+
+      <h2>Éditeur du site</h2>
+      <p>Le site Ismail 3000 est édité à titre personnel par Ismail Haiber, Paris, France.<br>
+      Contact : <a href={`mailto:${email}`}>{email}</a></p>
+      <p>Directeur de la publication : Ismail Haiber.</p>
+
+      <h2>Hébergement</h2>
+      <p>Netlify, Inc., 512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis. <a href="https://www.netlify.com" rel="noopener" target="_blank">netlify.com</a></p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>Les textes, visuels et kits publiés sur ce site sont la propriété d'Ismail Haiber, sauf mention contraire. Les kits peuvent être utilisés librement dans vos projets ; leur revente ou leur republication sans citer la source n'est pas autorisée.</p>
+
+      <h2>Données personnelles</h2>
+      <p>Voir la <a href={route("confidentialite", "fr")}>politique de confidentialité</a>.</p>
+    </div>
+  </section>
+</Base>

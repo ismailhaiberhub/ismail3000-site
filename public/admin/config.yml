@@ -1,4 +1,4 @@
-# Administration du site Ismail 3000 (Decap CMS)
+# Administration du site Ismail 3000 (Sveltia CMS, compatible Decap CMS)
 # Connexion via GitHub : seuls les comptes ayant les droits d'écriture
 # sur le dépôt peuvent modifier et publier.
 backend:
@@ -14,17 +14,18 @@ backend:
 locale: fr
 site_url: /
 display_url: /
-media_folder: uploads
-public_folder: uploads
+media_folder: public/uploads
+public_folder: /uploads
 
 collections:
   - name: site
     label: Site
+    icon: tune
     editor: { preview: false }
     files:
       - name: contenu
-        label: Contenu du site
-        file: data.json
+        label: Profil
+        file: src/content/profil.json
         format: json
         fields:
           - label: Statut (badge de l'accueil)
@@ -228,3 +229,168 @@ collections:
             fields:
               - { label: Photo, name: photo, widget: image }
               - { label: CV (PDF), name: cv, widget: file }
+
+      - name: reglages
+        label: Réglages et accueil
+        file: src/content/reglages.json
+        format: json
+        fields:
+          - label: Site
+            name: site
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Nom du site, name: nom, widget: string }
+              - label: Slogan
+                name: slogan
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - label: Description par défaut (Google et partages)
+                name: description
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: text }
+                  - { label: Anglais, name: en, widget: text }
+              - { label: "Image de partage par défaut (1200 x 630)", name: image_partage, widget: image }
+
+          - label: Bandeau d'annonce
+            name: annonce
+            widget: object
+            collapsed: false
+            fields:
+              - { label: Afficher le bandeau, name: actif, widget: boolean, required: false }
+              - label: Texte
+                name: texte
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - label: Texte du lien
+                name: lien_texte
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: string }
+                  - { label: Anglais, name: en, widget: string }
+              - label: Lien
+                name: lien
+                widget: string
+                required: false
+                hint: "Une page du site (newsletter, contact, profil) ou une adresse complète https://..."
+
+          - label: Accueil
+            name: accueil
+            widget: object
+            collapsed: true
+            fields:
+              - label: Texte d'introduction
+                name: intro
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: text }
+                  - { label: Anglais, name: en, widget: text }
+              - label: Cartes des rubriques
+                name: rubriques
+                widget: list
+                summary: "{{fields.titre.fr}} ({{fields.statut}})"
+                fields:
+                  - label: Titre
+                    name: titre
+                    widget: object
+                    fields:
+                      - { label: Français, name: fr, widget: string }
+                      - { label: Anglais, name: en, widget: string }
+                  - label: Texte
+                    name: texte
+                    widget: object
+                    fields:
+                      - { label: Français, name: fr, widget: text }
+                      - { label: Anglais, name: en, widget: text }
+                  - label: Icône
+                    name: icone
+                    widget: select
+                    options:
+                      - { label: News, value: news }
+                      - { label: Téléchargement, value: kit }
+                      - { label: Fusée (startups), value: rocket }
+                      - { label: Robot (agents), value: bot }
+                  - label: Statut
+                    name: statut
+                    widget: select
+                    options:
+                      - { label: "Bientôt (carte grisée)", value: bientot }
+                      - { label: "Disponible (carte allumée)", value: disponible }
+                  - { label: "Lien (si disponible)", name: lien, widget: string, required: false }
+              - label: Bloc « La QA pour les startups »
+                name: startups
+                widget: object
+                fields:
+                  - label: Titre
+                    name: titre
+                    widget: object
+                    fields:
+                      - { label: Français, name: fr, widget: string }
+                      - { label: Anglais, name: en, widget: string }
+                  - label: Étapes
+                    name: etapes
+                    widget: list
+                    summary: "{{fields.titre.fr}}"
+                    fields:
+                      - label: Titre
+                        name: titre
+                        widget: object
+                        fields:
+                          - { label: Français, name: fr, widget: string }
+                          - { label: Anglais, name: en, widget: string }
+                      - label: Texte
+                        name: texte
+                        widget: object
+                        fields:
+                          - { label: Français, name: fr, widget: text }
+                          - { label: Anglais, name: en, widget: text }
+
+          - label: Contact
+            name: contact
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Lien de prise de rendez-vous (Calendly, Cal.com...)", name: rendez_vous, widget: string, required: false }
+
+          - label: Réseaux sociaux
+            name: reseaux
+            widget: list
+            collapsed: true
+            summary: "{{fields.nom}}"
+            hint: "LinkedIn, GitHub, YouTube, X et Instagram ont leur icône ; les autres réseaux s'affichent avec une icône de lien."
+            fields:
+              - { label: Nom, name: nom, widget: string }
+              - { label: Adresse, name: url, widget: string }
+
+          - label: Newsletter
+            name: newsletter
+            widget: object
+            collapsed: true
+            fields:
+              - label: Texte d'accroche
+                name: texte
+                widget: object
+                fields:
+                  - { label: Français, name: fr, widget: text }
+                  - { label: Anglais, name: en, widget: text }
+              - label: Adresse du formulaire Brevo
+                name: brevo_action
+                widget: string
+                required: false
+                hint: "Laisse vide pour collecter les inscriptions dans Netlify Forms. Sinon, colle l'adresse « action » du formulaire Brevo (https://...sibforms.com/serve/...)."
+
+          - label: Statistiques
+            name: statistiques
+            widget: object
+            collapsed: true
+            fields:
+              - label: Domaine Plausible
+                name: plausible_domaine
+                widget: string
+                required: false
+                hint: "Exemple : ismail3000.fr. Laisse vide pour désactiver les statistiques."

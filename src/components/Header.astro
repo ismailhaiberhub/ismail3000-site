@@ -1,0 +1,45 @@
+---
+import { ROUTES, UI, route, type Lang, type RouteKey } from "../i18n/ui";
+
+interface Props { lang: Lang; routeKey?: RouteKey }
+const { lang, routeKey } = Astro.props;
+const u = UI[lang];
+const links: { key: RouteKey; label: string }[] = [
+  { key: "home", label: u.nav_home },
+  { key: "profil", label: u.nav_profil },
+  { key: "newsletter", label: u.nav_newsletter },
+  { key: "contact", label: u.nav_contact },
+];
+const other = lang === "fr" ? "en" : "fr";
+const switchTo = routeKey ? ROUTES[routeKey][other] : route("home", other);
+---
+<a class="skip" href="#contenu">{u.skip}</a>
+<nav class="nav" aria-label="Navigation">
+  <div class="wrap">
+    <a class="logo" href={route("home", lang)} aria-label="Ismail 3000">I<b>·</b>3000</a>
+    <div class="links" id="nav-links">
+      {links.map((l) => (
+        <a href={route(l.key, lang)} aria-current={routeKey === l.key ? "page" : undefined}>{l.label}</a>
+      ))}
+    </div>
+    <div class="navtools">
+      <div class="lang" role="group" aria-label={lang === "fr" ? "Langue" : "Language"}>
+        {lang === "fr"
+          ? <><span class="on" aria-current="true">FR</span><a href={switchTo} hreflang="en" lang="en">EN</a></>
+          : <><a href={switchTo} hreflang="fr" lang="fr">FR</a><span class="on" aria-current="true">EN</span></>}
+      </div>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="nav-links" aria-label={u.menu}>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<script>
+  const burger = document.querySelector<HTMLButtonElement>(".burger");
+  const links = document.getElementById("nav-links");
+  burger?.addEventListener("click", () => {
+    const open = burger.getAttribute("aria-expanded") !== "true";
+    burger.setAttribute("aria-expanded", String(open));
+    links?.classList.toggle("open", open);
+  });
+</script>

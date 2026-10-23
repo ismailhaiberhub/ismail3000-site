@@ -1,0 +1,25 @@
+---
+import reglages from "../content/reglages.json";
+import { UI, route, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang; source?: string }
+const { lang, source = "site" } = Astro.props;
+const u = UI[lang];
+// Tant que Brevo n'est pas branché (adresse du formulaire vide dans l'admin), les inscriptions
+// sont collectées par Netlify Forms et exportables en CSV depuis le tableau de bord Netlify.
+const brevo = reglages.newsletter.brevo_action;
+const formAttrs = brevo
+  ? { action: brevo, method: "post" }
+  : { name: "newsletter", method: "post", action: route("merci", lang), "data-netlify": "true", "netlify-honeypot": "bot-field" };
+---
+<form class="nl-form" {...formAttrs}>
+  {!brevo && <input type="hidden" name="form-name" value="newsletter">}
+  <input type="hidden" name="source" value={source}>
+  <p hidden><label>Ne pas remplir <input name="bot-field"></label></p>
+  <label class="sr" for={`nl-${source}`}>{u.nl_email}</label>
+  <div class="nl-row">
+    <input id={`nl-${source}`} type="email" name={brevo ? "EMAIL" : "email"} required placeholder={u.nl_email} autocomplete="email">
+    <button class="btn" type="submit">{u.nl_send}</button>
+  </div>
+  <p class="nl-consent">{u.nl_consent} <a href={route("confidentialite", lang)}>{u.privacy}</a>.</p>
+</form>
